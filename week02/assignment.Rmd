@@ -1,0 +1,44 @@
+---
+title: "assignment w2"
+author: "AloB"
+output: html_document
+date: "2025-03-04"
+---
+
+```{r}
+suppressPackageStartupMessages({
+  library(AnnotationHub) # to fetch genomes, annotations, etc.
+  library(ensembldb)     # to manipulate ensembl gene annotations
+  library(GenomicRanges) # data structure for genomic ranges 
+  library(epiwraps)      # visualization
+})
+```
+
+```{r}
+ah <- AnnotationHub()
+
+dm <- query(ah, c("mus musculus", "EnsDB", "GRCm38", "102"))
+dm
+
+ensdb <- ah[["AH89211"]]
+ensdb
+```
+
+```{r}
+genes <- genes(ensdb)
+genes
+
+prcg <- genes[which(genes$gene_biotype=="protein_coding")]
+prcg
+
+length(genes)
+
+length(unique(prcg$gene_name))
+length(unique(prcg$gene_id))
+length(unique(prcg$symbol))
+
+```
+
+I couldn't finish the assignment as I didn't understand how to download the genome sequence.
+
+I also couldn't find a way to plot the distribution of spliced exons.
